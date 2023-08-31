@@ -1,0 +1,10 @@
+{% extends 'bitrix_adminmode/base.html' %}
+
+{% block head %}
+  {% include 'bitrix_adminmode/includes/portal_log/style.html' %}
+{% endblock %}
+
+{% block content %}
+  {% include 'bitrix_adminmode/includes/portal_log/records.html' %}
+  {% include 'bitrix_adminmode/includes/portal_log/pagination.html' %}
+{% endblock %}

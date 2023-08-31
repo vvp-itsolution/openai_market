@@ -1,0 +1,68 @@
+{% extends 'documentation/base.html' %}
+
+{% block body %}
+    <div class="container auto-fetch-result">
+    {% for repo, result in results.repos.items %}
+            <h2><mark>{{ repo }}</mark></h2>
+
+            {% if result.error %}
+                <div class="list-group">
+                    {% for error in result.error %}
+                        <div class="alert alert-danger" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if result.created %}
+                <h3>Created</h3>
+                <div class="list-group">
+                    {% for pk, article in result.created %}
+                      <a href="{% url 'article' pk %}" class="list-group-item list-group-item-success">{{ article }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if result.edited %}
+            <h3>Edited</h3>
+            <div class="list-group">
+                {% for pk, article in result.edited %}
+                  <a href="{% url 'article' pk %}" class="list-group-item list-group-item-info">{{ article }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if result.unmodified %}
+            <h3>Unmodified</h3>
+            <div class="list-group">
+                {% for pk, article in result.unmodified %}
+                  <a href="{% url 'article' pk %}" class="list-group-item list-group-item">{{ article }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if result.skipped %}
+            <h3>Skipped</h3>
+            <div class="list-group">
+                {% for pk, article in result.skipped %}
+                  <a class="list-group-item list-group-item-warning">{{ article }}</a>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+    {% endfor %}
+
+        {% if results.deleted %}
+        <hr>
+        <h2>Deleted</h2>
+        <div class="list-group">
+            {% for article in results.deleted %}
+              <a href="" class="list-group-item list-group-item-danger">{{ article }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

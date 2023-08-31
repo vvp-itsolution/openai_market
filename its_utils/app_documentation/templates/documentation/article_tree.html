@@ -1,0 +1,25 @@
+{% extends 'documentation/base.html' %}
+
+{% load mptt_tags %}
+
+{% block body %}
+
+<div class="container">
+    <div class="list-group">
+        {% recursetree directories %}
+            <div class="list-group-item tree">
+                {% if node.articles or children %}
+                    <strong>{{ node.name }}</strong>
+                {% for article in node.articles %}
+                    <a href="{% url 'article' article.pk %}" class="list-group-item list-group-item-info tree" href="">{{article}}</a>
+                {% endfor %}
+
+                <div class="list-group tree">
+                    {{ children }}
+                </div>
+            </div>
+            {% endif %}
+        {% endrecursetree %}
+    </div>
+</div>
+{% endblock body %}

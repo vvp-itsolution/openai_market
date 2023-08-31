@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    div.body {
+        width: 60%;
+        margin: 0 auto;
+    }
+</style>
+<body>
+
+<div class="body">
+    <h3>{{ cron.name }}</h3>
+    <h4>{{ cron.path }}</h4>
+    <h4>{{ cron.string }}</h4>
+
+    <pre>{{ cron.parameters }}</pre>
+    <form action="{% url 'run_cron' cron.id %}/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Запустить">
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Демо приложение</title>
+    <style>
+        .container {
+          column-count: 3;
+        }
+    </style>
+</head>
+<body>
+{#    {% include "top_menu.html" %}#}
+{#    {% include "tech_info_include.html" %}#}
+
+<br>
+<h1>Первичные настройки приложения</h1>
+
+<form>
+  api key gpt <input id="apikey" name="apikey" type="text" value="Текст"><br>
+</form>
+<button onclick="save_key()">Сохранить ключи openai</button><br>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+    function save_key() {
+    $.ajax({
+      url:"/gptconnector/save_api_key/",
+      type:"POST",
+      beforeSend: function(xhr){
+                //xhr.setRequestHeader("Content-Type","application/json");
+                //xhr.setRequestHeader("Accept","application/json");
+                xhr.setRequestHeader("Authorization", window.user_token_sig);
+      },
+      data:{ api_key: document.getElementById('apikey').value},
+      //dataType:"json"
+      //dataType:"html"
+    })};
+</script>
+
+<button onclick="send_with_user_token_sig('/gptconnector/register_engine/', {})">Зарегистрировать обработчик</button><br>
+<button onclick="send_with_user_token_sig('/gptconnector/unregister_engine/', {})">Удалить обработчик</button><br>
+<script>
+    function send_with_user_token_sig(url, data={}) {
+    $.ajax({
+      url:url,
+      type:"POST",
+      beforeSend: function(xhr){
+                xhr.setRequestHeader("Authorization", window.user_token_sig);
+      },
+      data: data
+    })}
+</script>
+{#<script src="{% static 'dist/assets/map1.js' %}"></script>#}
+</body>
+<script src="//api.bitrix24.com/api/v1/"></script>
+<script>
+    window.user_token_sig = "{{ rd.user_token_sig }}"
+</script>
+</html>

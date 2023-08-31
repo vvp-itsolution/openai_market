@@ -1,0 +1,32 @@
+<div class="container-fluid p-0">
+  <header>
+    <div
+      class="border-bottom px-4 py-2 bg-light d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+      <div class="mr-auto small">
+        Режим администратора приложения <b>{{ admin_mode_settings.title }}</b>.
+        Вы авторизованы как {{ request.bx_user.display_name }} ({{ request.bx_portal }})
+      </div>
+      <div class="ml-auto" style="margin-left: auto">
+        <a href="https://it-solution.ru" target="_blank">
+          <picture>
+            <source media="(max-width: 549px)"
+                    srcset="https://it-solution.ru/static/bitrix_app_panel/assets/img/its_logo_mobile.png">
+            <source media="(min-width: 550px)"
+                    srcset="https://it-solution.ru/static/bitrix_app_panel/assets/img/its_logo.png">
+            <img src="https://it-solution.ru/static/bitrix_app_panel/assets/img/its_logo.png"></picture>
+        </a>
+      </div>
+    </div>
+    <div class="nav-scroller px-3 mb-2 d-flex bg-white">
+      <ul class="nav col-12 col-md-auto mb-2 mb-md-0 mr-a">
+        {% for view in admin_mode_settings.get_view_dicts %}
+          <a
+            class="nav-link px-2 link-secondary{% if request.resolver_match.view_name == view.view_name %} link-dark fw-bold{% endif %}"
+            href="{% url view.view_name %}"
+          >{{ view.title }}
+          </a>
+        {% endfor %}
+      </ul>
+    </div>
+  </header>
+</div>

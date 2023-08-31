@@ -1,0 +1,14 @@
+<!doctype html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Переход</title>
+<body>
+
+  <h1>{% if message %}{{ message }}{% else %}Переход...{% endif %}</h1>
+</body>
+
+<script>
+  !function(url) {
+      window.top.location = url;
+  }("{{ url }}");
+</script>

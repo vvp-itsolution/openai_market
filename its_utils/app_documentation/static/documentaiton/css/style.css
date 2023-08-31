@@ -1,0 +1,153 @@
+body {
+    padding-top: 140px;
+    color: #414966;
+}
+
+pre {
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Спойлеры */
+details {
+    padding-left: 20px;
+}
+
+details > summary {
+    margin-left: -20px;
+}
+
+summary:hover, summary:focus {
+    background: #ddd;
+}
+
+summary {
+    cursor: pointer;
+}
+
+/* FF & IE */
+details > * {
+    display: none;
+}
+
+details summary {
+    display: block;
+}
+
+details[open] > * {
+    display: block;
+}
+
+details > summary:before {
+    font-size: 0.7em;
+    font-family: 'Glyphicons Halflings';
+    -webkit-font-smoothing: antialiased;
+    content: "\e080 ";
+}
+
+details[open] > summary:before {
+    content: "\e114 ";
+}
+
+.btn-image-relative {
+    position: relative;
+    bottom: 45px;
+    left: 5px;
+    height: 40px;
+}
+
+.second-nav-bar {
+    top: 50px;
+    padding: 5px;
+}
+
+.second-nav-bar li {
+    margin-right: 20px;
+}
+
+
+.hidden-overflow {
+    overflow: hidden;
+}
+
+.auto-fetch-result h3 {
+    padding-left: 50px;
+}
+
+.auto-fetch-result div {
+    padding-left: 70px;
+}
+
+.list-group-item.tree {
+    border-right: none;
+    border-bottom: none;
+    border-top: none;
+    padding-right: 0;
+}
+
+.container > .list-group > .list-group-item > strong {
+    font-size: 1.5em;
+}
+
+div.article-dir-tree {
+    padding: 5px 0px 0px 20px;
+    margin-top: 5px;
+    /*background-color: #FCF8E7;*/
+}
+
+div.article-dir-tree a:before {
+    text-decoration: none;
+    color: black;
+    text-decoration: line-through;
+}
+
+div.article-dir-tree a {
+    text-decoration: none;
+}
+
+div.article-dir-tree a:hover div{
+    background-color: #E6E2C6;
+}
+
+div.article-dir-tree a div{
+    color: black;
+}
+
+
+div.article-dir-tree div.current{
+    background-color: #E6E2C6;
+}
+
+span.edit {
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+img[alt=w5] {width: 5%;}
+img[alt=w10] {width: 10%;}
+img[alt=w15] {width: 15%;}
+img[alt=w20] {width: 20%;}
+img[alt=w25] {width: 25%;}
+img[alt=w30] {width: 30%;}
+img[alt=w35] {width: 35%;}
+img[alt=w40] {width: 40%;}
+img[alt=w45] {width: 45%;}
+img[alt=w50] {width: 50%;}
+img[alt=w55] {width: 55%;}
+img[alt=w60] {width: 60%;}
+img[alt=w65] {width: 65%;}
+img[alt=w70] {width: 70%;}
+img[alt=w75] {width: 75%;}
+img[alt=w80] {width: 80%;}
+img[alt=w85] {width: 85%;}
+img[alt=w90] {width: 90%;}
+img[alt=w95] {width: 95%;}
+img[alt=w100] {width: 100%;}

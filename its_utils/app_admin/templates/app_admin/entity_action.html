@@ -1,0 +1,35 @@
+<div id="actionsfield">
+    <script>
+        // Джанго добавляет пустой <p></p> почему-то. Из-за этого виджет смещается вниз
+        django.jQuery('.field-entity_action').find('p')[0].remove();
+
+        function send_action() {
+            // Создать форму
+            var form = django.jQuery('<form id="actform" action="../.." method="post"  style="display: None"></form>');
+            // Перенести блок с полями в форму
+            form.append(django.jQuery('#actions'));
+            // Переместить токен в форму
+            form.append(django.jQuery("input[name=\'csrfmiddlewaretoken\']")[0]);
+            // Поместить форму в конец документа
+            django.jQuery('body').append(form);
+
+            // Выполнить
+            form.submit();
+
+            // Так как select перемещён в конец формы, то пока выполняется действие, на этом месте будет пустое
+            // пространство. Поместим туда что-ниюудь, чтобы  было не так страшно
+            django.jQuery('#actionsfield').append(django.jQuery('<div>Выполняется...</div>'));
+        }
+    </script>
+    <div id="actions">
+        <select name="action">
+            {% for name, description in actions %}
+                <option value="{{ name }}">{{ description }}</option>
+            {% endfor %}
+        </select>
+        <button type="button" onclick="send_action()">Выполнить</button>
+
+        <input name="_selected_action" value="{{ entity_id }}" style="display: none">
+        <input name="_infoblock_entity_action" value="1" style="display: none">
+    </div>
+</div>

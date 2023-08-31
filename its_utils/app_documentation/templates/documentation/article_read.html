@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ article.title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/its/docs/static/documentaiton/css/article_read.css">
+</head>
+<body>
+    <div class="article">
+        <h1>{{ article.title }}</h1>
+        <hr>
+        {{ article.rendered_body | safe }}
+    </div>
+</body>
+</html>

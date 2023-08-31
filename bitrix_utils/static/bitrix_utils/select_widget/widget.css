@@ -1,0 +1,144 @@
+div.select-users-widget-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+    background: rgba(0, 0, 0, .5);
+}
+
+div.col4 {
+    display: inline-block;
+    width: 32%;
+    max-width: 32%;
+    min-width: 32%;
+}
+
+div.col2 {
+    display: inline-block;
+    width: 15%;
+    max-width: 15%;
+    min-width: 15%;
+}
+
+div.select-users-widget {
+    border: 2px solid #b3b7b9;
+    position: fixed;
+    left: 50%;
+    top: 50px;
+    margin-left: -475px;
+    background-color: #EEF2F4;
+    width: 950px;
+    height: 480px;
+    z-index: 9999;
+}
+
+div.scroll-block-wrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
+div.scroll-block {
+    overflow: auto;
+    width: 105%;
+    height: 288px;
+}
+
+div.select-users-widget > div {
+    padding-bottom: 20px;
+}
+
+div.select-users-widget input {
+    margin: 20px 0;
+    border-radius: 0;
+}
+
+div.select-users-widget input:focus {
+    border-color: #D6F1FB;
+    box-shadow: none;
+}
+
+div.btx-btn.btx-btn-ninja.item {
+    text-align: left;
+    font-size: 12px;
+    line-height: 18px;
+}
+
+div.btx-btn.btx-btn-ninja.item.active {
+    background: #D6F1FB;
+}
+
+div.row {
+    margin-top: 10px;
+}
+
+.select-users-widget .row {
+    margin-left: 15px;
+}
+
+div.row.controls div.col-md-4, div.row.controls div.col-md-2 {
+    padding-left: 0;
+}
+
+button.select-button {
+    border: none;
+    width: 100%;
+    padding: 10px;
+    float: right;
+    display: inline-block;
+}
+
+button.select-button span.checkbox {
+    font-size: 25px;
+    display: inline-block;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #C6CDD3;
+    margin: 2px 0 0 10px;
+    padding: 0;
+}
+
+button.select-button span.checkbox span {
+    display: inline-block;
+    position: absolute;
+    top: -12px;
+    left: 0;
+}
+
+button.select-button span.checkbox.selected span:after {
+    content: '✔';
+}
+
+div.row.disabled div {
+    opacity: 0.8;
+    background-color: #EEF2F4;
+}
+
+div.error-message {
+    text-align: center;
+}
+
+@media (max-width: 940px) {
+    div.select-users-widget-lg {
+        width: 90vw;
+        height: 90vh;
+        margin-left: 0;
+        transform: translate(-50%);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    div.col1-lg {
+        display: inline-block;
+        width: calc(100% - 15px);
+        max-width: calc(100% - 15px);
+        min-width: calc(100% - 15px);
+    }
+    div.col4-lg {
+        display: inline-block;
+        width: 32%;
+        max-width: 32%;
+        min-width: 32%;
+    }
+}

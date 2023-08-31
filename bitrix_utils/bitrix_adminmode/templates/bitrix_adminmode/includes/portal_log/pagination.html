@@ -1,0 +1,13 @@
+{% if records_per_page %}
+  <div class="mb-4 text-center">
+    <a
+      {% if page > 1 %}href="{{ prev_page_url }}"
+      {% else %}class="disabled"{% endif %}
+    >&lt;&lt; предыдущая страница</a>
+    |
+    <a
+      {% if log_records|length >= records_per_page %}href="{{ next_page_url }}"
+      {% else %}class="disabled"{% endif %}
+    >следующая страница &gt;&gt;</a>
+  </div>
+{% endif %}

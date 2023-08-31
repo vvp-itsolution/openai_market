@@ -1,0 +1,107 @@
+{% extends 'documentation/base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+
+{% block article_header %}
+<nav class="navbar navbar-default navbar-lower navbar-fixed-top  second-nav-bar" role="navigation">
+    <div class="container">
+        <div class="collapse navbar-collapse collapse-buttons">
+            <!--<button class="btn btn-default">Добавить изображение</button>-->
+            <a href="{% url 'article_diffs' article.pk %}"><button class="btn btn-default">История изменений</button></a>
+            {% if not article.auto_fetched %}
+                <a href="{% url 'article_edit' article.pk %}"><button class="btn btn-default">Редактировать</button></a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block angular %}
+<body ng-app="app">
+{% endblock %}
+{% block body %}
+    <script>
+        window.articleId = {{ article.id }};
+    </script>
+    <!-- <div class="container"> -->
+    <div class="col-md-3">
+        {% load mptt_tags %}
+    <div class="list-group">
+        {% recursetree directories %}
+            <div class="list-group-item tree">
+                {% if node.articles or children %}
+                    <strong>{{ node.name }}</strong>
+                {% for article in node.articles %}
+                    <a href="{% url 'article' article.pk %}" class="list-group-item list-group-item-info tree" href="">{{article}}</a>
+                {% endfor %}
+                {% endif %}
+                {% if not node.is_leaf_node %}
+                <div class="list-group tree">
+                    {{ children }}
+                </div>
+                {% endif %}
+            </div>
+        {% endrecursetree %}
+    </div>
+   </div>
+    <div class="col-md-6">
+        <h1>{{ article.title }}</h1>
+        <hr>
+        <div id="article" ng-controller="MainCtrl">
+            {{ article.rendered_body | safe }}
+            <!-- Modal -->
+                {% verbatim %}
+                    <div class="modal fade" id="articlePartialEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea data-markdown-panel class="form-control" rows="30" ng-model="editedBodyPart"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" ng-click="saveArticlePart()">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endverbatim %}
+        </div>
+    </div>
+    {% if diffs %}
+    <div class="col-md-3">
+            <div>
+                <input class="form-control" type="text" value="{{ host }}{% url 'article_read' article.pk %}?key={{ article.secret_key }}" readonly>
+            </div>
+            {% if article.github_url %}
+            <div><a href="{{ article.github_url }}"><img src="/its/docs/static/documentaiton/img/github_logo.png" alt="Github"></a></div>
+            {% endif %}
+
+            <menu class="list-group">
+            </menu>
+
+            <br>
+            <h3>Последние изменения</h3>
+            <table class="table">
+            <th>Пользователь</th>
+            <th>Дата</th>
+            {% for diff in diffs %}
+                <tr>
+                    <td>{{ diff.user }}</td>
+                    <td>{{ diff.created }}</td>
+                </tr>
+            {% endfor %}            
+            </table>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block custom_js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="/its/docs/static/documentaiton/js/article.js"></script>
+    <script src="/its/docs/static/documentaiton/js/markdown.js"></script>
+{% endblock %}

@@ -1,0 +1,11 @@
+django
+django-mptt
+django-prettyjson
+psycopg2-binary
+python-dateutil
+requests
+pytz
+six
+
+# Для примера gptconnector
+openai

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{% for message in messages %}
+    <div>
+        <pre>
+            {{ message }}
+        </pre>
+    </div>
+{% endfor %}
+
+<div>
+    {% if result %}
+        Результат: {{ result }}
+    {% else %}
+        Нет результата выполнения функции
+    {% endif %}
+</div>
+
+Потрачено времени: {{ time | floatformat:3 }} с
+</body>
+</html>

@@ -1,0 +1,4 @@
+django==1.6
+markdown==2.6.2
+unidecode==0.4.18
+pillow==2.9.0

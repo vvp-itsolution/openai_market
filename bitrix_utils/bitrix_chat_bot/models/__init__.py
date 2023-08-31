@@ -1,0 +1,2 @@
+from .bitrix_chat_bot import BitrixChatBot
+from .bitix_chat_bot_event_log import BitrixChatBotEventLog

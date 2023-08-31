@@ -1,0 +1,9 @@
+*.pyc
+.idea/
+media/
+local_settings.py
+private_settings.py
+.venv/
+.venv
+venv/
+.media/

@@ -1,0 +1,19 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Уведомление пользователей{% endblock %}
+
+{% block content %}
+<h1>Уведомление пользователей</h1>
+<h3>Вы собираетесь уведомить {{ users|length }} пользователей</h3>
+<form method="POST" action="">
+  {{ form.as_p }}
+  {% csrf_token %}
+  <input type="hidden" name="action" value="{{ django_action_form.action }}" />
+  <input type="hidden" name="select_across" value="{{ django_action_form.select_across }}" />
+  <input type="hidden" name="index" value="{{ django_action_form.index }}" />
+  {% for selected_pk in django_action_form.selected_action %}
+    <input type="hidden" name="_selected_action" value="{{ selected_pk }}" />
+  {% endfor %}
+  <input type="submit" value="Отправить уведомления">
+</form>
+{% endblock %}

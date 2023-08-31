@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="/static/bitrix_utils/select_widget/widget.css">
+<span ng-click="toggle()" class="hand" ng-transclude></span>
+<div id="select-users-widget-wrapper" class="select-users-widget-wrapper" ng-show="showWidget" ng-click="closeWidget($event)">
+    <div class="select-users-widget select-users-widget-lg">
+        <div class="container-fluid">
+            <div class="row" ng-class="{'disabled': allSelected}">
+                <div class="col4 col1-lg select-users-col">
+                    <h4>Пользователи</h4>
+                    <input type="text" placeholder="Фильтр" class="form-control" ng-model="userFilter">
+
+                    <div class="scroll-block-wrapper">
+                        <div class="scroll-block">
+                            <div class="btx-btn btx-btn-ninja item" ng-click="toggleObject(user)"
+                                 ng-class="{active: user.selected}"
+                                 ng-repeat="user in users | filterObject : userFilter">
+                                {{ user.FULL_NAME }}
+                                <!--<span ng-show="!(user.LAST_NAME && user.NAME)">Без Имени</span>-->
+                            </div>
+                            <div class="error-message" ng-show="!users.length && errors.users"><h4>Нет доступа</h4></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col4 col1-lg">
+                    <h4>Подразделения</h4>
+                    <input type="text" placeholder="Фильтр" class="form-control" ng-model="departmentFilter">
+
+                    <div class="scroll-block-wrapper">
+                        <div class="scroll-block">
+                            <div class="btx-btn btx-btn-ninja item" ng-click="toggleObject(department)"
+                                 ng-class="{active: department.selected}"
+                                 ng-repeat="department in departments | filterObject : departmentFilter">
+                                {{ department.NAME }}
+                                <span ng-show="!department.NAME">Без Имени</span></div>
+                            <div class="error-message" ng-show="!departments.length && errors.departments"><h4>Нет доступа</h4></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col4 col1-lg">
+                    <h4>Группы</h4>
+                    <input type="text" placeholder="Фильтр" class="form-control" ng-model="groupFilter">
+
+                    <div class="scroll-block-wrapper">
+                        <div class="scroll-block">
+                            <div class="btx-btn btx-btn-ninja item item" ng-click="toggleObject(group)"
+                                 ng-class="{active: group.selected}"
+                                 ng-repeat="group in groups | filterObject : groupFilter">
+                                {{ group.NAME }}
+                                <span ng-show="!group.NAME">Без Имени</span>
+                            </div>
+                            <div class="error-message" ng-show="!groups.length && groups.departments"><h4>Нет доступа</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row controls">
+                <div class="col4 col1-lg"></div>
+                <div class="col4 col1-lg"></div>
+                <div class="col2 col4-lg">
+                    <button class="btx-btn btx-btn-bored select-button" ng-click="selectAll()">
+                        Все
+                        <span class="checkbox" ng-class="{'selected': allSelected}"><span></span></span>
+                    </button>
+                </div>
+                <div class="col2 col4-lg">
+                    <button class="btx-btn btx-btn-success select-button" ng-click="select()">Выбрать</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

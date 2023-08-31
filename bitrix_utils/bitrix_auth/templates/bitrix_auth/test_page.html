@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{% if bx_user %}
+    Информация о пользователе
+    <div>{{ bx_user.last_name }} {{ bx_user.first_name }}</div>
+    <div>{{ bx_user.email }}</div>
+    <div>Админ? {{ bx_user.is_admin }}</div>
+    <div>{{ bx_user.portal }}</div>
+    <div>auth_token: {{ bx_user.auth_token }}</div>
+{% else %}
+    Нет информации о пользователе. Необходимо зайти через портал bitrix'a.
+{% endif %}
+</body>
+</html>

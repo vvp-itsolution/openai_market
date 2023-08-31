@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ошибка</title>
+</head>
+<body>
+<h3>Ошибка 500</h3>
+<code>
+  <b>{% now "DATETIME_FORMAT" %}</b><br>
+  {% if request.session.log_record_id %}id записи в лог: <b>{{ request.session.log_record_id }}</b><br>{% endif %}
+  url: <b>{{ request.path }}</b>
+</code>
+</body>
+</html>

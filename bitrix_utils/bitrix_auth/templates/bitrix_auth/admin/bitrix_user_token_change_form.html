@@ -1,0 +1,40 @@
+{% extends 'admin/change_form.html' %}
+
+
+{% block extrahead %}
+  {{ block.super }}
+  <script>
+    function _itsRefreshToken() {
+      // Костыли с запросом действия refresh
+      // на списочную вьюху django-админки
+      // см. BitrixUserTokenAdmin.actions
+      var csrfToken = django.jQuery('input[name=csrfmiddlewaretoken]').val();
+      django.jQuery.post("../..", {
+        csrfmiddlewaretoken: csrfToken,
+        action: "refresh",
+        _selected_action: "{{ object_id }}"
+      }, function(responseHtml) {
+        // Тут возвращается html - что отрисовала списочная вьюха,
+        // ошибка там или нет - страница обновляется.
+        window.location.reload();
+      });
+    }
+  </script>
+{% endblock %}
+
+{% block after_field_sets %}
+  {{ block.super }}
+  <fieldset class="module">
+    <h2>Дополнительные действия</h2>
+    <div class="form-row">
+      <a class="button"
+         href="{{ bitrix_user_token_auth_url }}"
+         target="_blank">Авторизоваться с помощью токена</a>
+    </div>
+    <div class="form-row">
+      <button type="button" class="button" onclick="_itsRefreshToken()">
+        Обновить токен
+      </button>
+    </div>
+  </fieldset>
+{% endblock %}

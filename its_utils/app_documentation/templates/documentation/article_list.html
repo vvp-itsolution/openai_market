@@ -1,0 +1,13 @@
+{% extends 'documentation/base.html' %}
+
+{% block body %}
+    <div class="container">
+        <ul class="list-group">
+            {% for article in articles %}
+                <a href="{% url 'article' article.pk %}">
+                    <button type="button" class="list-group-item ">{{ article.title }}</button>
+                </a>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

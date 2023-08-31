@@ -1,0 +1,140 @@
+body {
+    color: #234f64;
+}
+
+.header {
+    font-size: 2em;
+    margin-left: 30px;
+}
+
+.app-name {
+    padding-left: 5px;
+    width: 100%;
+    font-size: 1.5em;
+    background-color: #3e8db4;
+    color: white;
+}
+
+.control {
+    font-size: 10px;
+    /*margin-left: 30px;*/
+    cursor: pointer;
+}
+
+.control:hover {
+    text-decoration: underline;
+}
+
+.selectable {
+    display: block;
+    padding-left: 5px;
+    margin: 5px 0 5px 0;
+    color: #234f64;
+    font-size: 1.1em;
+}
+
+.selectable:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    background-color: #234f64;
+}
+
+.selectable.selected:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #234f64;
+}
+
+.selectable.selected {
+    color: white;
+    background-color: #53bcf4;
+}
+
+.field-name {
+    border-left: 2px solid #234f64;
+}
+
+.foreign-fields {
+    margin-left: 8px;
+    border-left: 2px solid #C05661;
+}
+
+.foreign-field-name {
+    background-color: #C05661;
+    color: white;
+    padding-left: 5px;
+}
+
+.field {
+    color: #234f64;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.field:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #234f64;
+}
+
+.margin-left {
+    margin-left: 15px;
+}
+
+.hand {
+    cursor: pointer;
+}
+
+.btn-select {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.btn-select:hover {
+    background-color: #234f64;
+}
+
+.btn-select:active {
+    background-color: #183644;
+}
+
+/*ul {*/
+    /*padding-left: 0;*/
+    /*margin-left: 0;*/
+/*}*/
+
+/*li {*/
+    /*list-style: none;*/
+    /*padding-left: 0;*/
+    /*margin-left: 0;*/
+/*}*/
+
+/*.row > ul > li {*/
+    /*margin-left: 0;*/
+/*}*/
+
+/*.item {*/
+    /*border-left: 2px solid #234f64;*/
+    /*padding-left: 5px;*/
+/*}*/
+
+.foreign {
+    border-left: 2px solid #C05661;
+    padding-left: 3px;
+}
+
+treecontrol {
+    color: red;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+treecontrol .tree-leaf-head  {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+treecontrol > ul:first-child > li {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}

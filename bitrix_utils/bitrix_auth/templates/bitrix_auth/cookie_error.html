@@ -1,0 +1,27 @@
+<!doctype html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ошибка авторизации</title>
+<body>
+  <div id="no-cookies" class="no_cookies"> {% comment %} adBlock блокирует class 'no-cookies'  {% endcomment %}
+    {% include 'bitrix_auth/includes/cookie_message.html' %}
+  </div>
+
+  <script src="//api.bitrix24.com/api/v1/"></script>
+  <script>
+    !function(BX24) {
+      BX24.init(function() {
+        setInterval(function() {
+          BX24.fitWindow();
+        }, 500);
+      });
+    }(window.BX24);
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+  </style>
+</body>
+

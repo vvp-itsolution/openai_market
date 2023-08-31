@@ -1,0 +1,5 @@
+div.form-row {
+  /* django-froala-editor ломает верстку прочих полей */
+  /* https://ts.it-solution.ru/#/ticket/61990/?entry=801681 */
+  overflow: hidden!important;
+}

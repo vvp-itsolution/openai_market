@@ -1,0 +1,16 @@
+{% extends 'documentation/base.html' %}
+
+{% block body %}
+<div class="container">
+    {% if articles %}
+        <h1>Результаты поиска для "{{ query }}"</h1>
+        <ul class="list-group">
+            {% for article in articles %}
+                <a href="{% url 'article' article.pk %}"><button type="button" class="list-group-item ">{{ article.title }}</button></a>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h1>Нет результатов для "{{ query }}"</h1>
+    {% endif %}
+</div>
+{% endblock %}

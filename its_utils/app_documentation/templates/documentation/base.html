@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/its/docs/static/documentaiton/css/style.css">
+    {% block custom_css %}
+    {% endblock %}
+    <title>{% block title %}Документация{% endblock %}</title>
+</head>
+
+{% block angular %}
+<body>
+{% endblock %}
+    <header class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'main_article' %}">
+                Документация
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" data-collapse="menuCollapsed" id="menu-collapsables">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{% url 'article_list' %}">Статьи</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'all_diffs' %}">Вся история</a>
+                    </li>
+                </ul>
+                <a class="btn btn-sm btn-primary navbar-btn" href="{% url 'article_new' %}">
+                    <span class="glyphicon glyphicon-plus"></span> Новая статья
+                </a>
+                <a href="{% url 'logout' %}">
+                <button class="btn btn-sm btn-danger navbar-btn navbar-right" type="button">
+                    <span class="glyphicon glyphicon-off"></span>
+                </button>
+                </a>
+                <form action="{% url 'article_search' %}" method="post" class="navbar-form navbar-right" role="search">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="query" class="form-control" placeholder="Поиск...">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+    {% block article_header %} {% endblock %}
+    {% block body %} {% endblock %}
+</body>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+{% block custom_js %}
+{% endblock %}
+
+</html>

@@ -1,0 +1,29 @@
+{% extends 'documentation/base.html' %}
+
+{% block body %}
+<div class="container">
+ <table class="table">
+    <thead>
+    <tr>
+        <th data-field="id" class="col-md-1">Article</th>
+        <th data-field="name" class="col-md-1">User ID</th>
+        <th data-field="name" class="col-md-6">Diff</th>
+    </tr>
+    </thead>
+    {% for diff in diffs %}
+            <tr>
+                <td>
+                    <a href="{% url 'article' diff.article.pk %}">{{ diff.article }}</a>
+                </td>
+                <td>
+                    {{ diff.user_id }}
+                </td>
+                <td>
+                    <pre>{{ diff.data }}</pre>
+                </td>
+            </tr>
+    {% endfor %}
+
+  </table>
+</div>
+{% endblock %}

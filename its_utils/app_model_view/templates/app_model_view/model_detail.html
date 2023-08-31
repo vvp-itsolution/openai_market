@@ -1,0 +1,75 @@
+{% extends 'app_model_view/base.html' %}
+{% block body %}
+    <script>
+        window.appName = "{{ app }}";
+        window.modelName = "{{ model }}";
+    </script>
+
+    {% verbatim %}
+    <div class="container-fluid" ng-app="modelViewApp" ng-controller="MainCtrl">
+        <div class="col-md-2">
+            <div class="row" ng-init="selectAll = false">
+                <div class="app-name">{{ app }}.{{ model }}
+                    <span class="control" ng-hide="selectAll" ng-click="unselectAll()">Снять все</span>
+                    <span class="control" ng-show="selectAll" ng-click="selectAllNodes()">Отметить все</span>
+                </div>
+            </div>
+            <div class="row">
+                <treecontrol class="tree-classic"
+                             tree-model="data.fields"
+                             selected-nodes="selectedNodes"
+                             on-node-toggle="getFieldsForForeign(node, expanded)"
+                             options="treeOptions">
+                    <span ng-class="{foreign: node.type == foreignKey}">{{node.label}}</span>
+                    <span ng-if="node.type != foreignKey">({{ node.type.substr(0, node.type.search('Field')) }})</span>
+                </treecontrol>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="app-name hand">
+                <span class="btn-select" ng-click="getData()" ng-show="data.fields.length">Получить данные</span>
+                <span class="btn-select" ng-click="gridOptions.api.sizeColumnsToFit()" ng-show="gridOptions.rowData">Колонки по ширине таблицы</span>
+                <span class="btn-select" ng-click="export()" ng-show="gridOptions.rowData">Экспорт</span>
+                <span class="btn-select" ng-click="clearTable()" ng-show="gridOptions.rowData">Очистить таблицу</span>
+            </div>
+            <div ng-show="gridOptions.rowData" ag-grid="gridOptions" class="ag-blue ag-basic"
+                 style="width: 100%; height: 1000px;"></div>
+        </div>
+    </div>
+    {% endverbatim %}
+{% endblock %}
+
+{% block customlinks %}
+    <link rel="stylesheet" href="/static/app_model_view/libs/ag-grid/ag-grid.min.css">
+    <link rel="stylesheet" href="/static/app_model_view/libs/ag-grid/theme-blue.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/app_model_view/libs/tree-view/tree-control.css">
+    <link rel="stylesheet" type="text/css" href="/static/app_model_view/libs/tree-view/tree-control-attribute.css">
+    <script src="/static/app_model_view/libs/angular.min.js"></script>
+    <script type="text/javascript" src="/static/app_model_view/libs/tree-view/angular-tree-control.js"></script>
+    <script src="/static/app_model_view/libs/ag-grid/ag-grid.min.js"></script>
+    <script src="/static/app_model_view/libs/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <script src="/static/app_model_view/js/app.js"></script>
+{% endblock %}
+
+
+<!--
+<div ng-repeat="field in fields">
+                <div class="selectable field-name" ng-if="field.type !== foreignKey" ng-click="field.unselected=!field.unselected">
+                    {{ field.name }}
+                    <span class="glyphicon glyphicon-ok" ng-show="!field.unselected"></span>
+                </div>
+                <div ng-if="field.type == foreignKey">
+                    <div class="foreign-field-name hand" ng-init="showForeign=true"> <!-- ng-click="showForeign=!showForeign"-->
+{{ field.name }}
+<!--span class="control" ng-show="!uncheckAllForeign[$index]" ng-click="changeCheckValueForOneField($index, true)">Снять все</span>
+                        <span class="control" ng-hide="!uncheckAllForeign[$index]" ng-click="changeCheckValueForOneField($index, false)">Отметить все</span>
+                    </div>
+                    <div ng-show="showForeign" class="foreign-fields selectable" ng-repeat="f in field.foreign" ng-click="f.unselected=!f.unselected">
+                        {{ f.name }}
+                    <span class="glyphicon glyphicon-ok" ng-show="!f.unselected"></span>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+-->

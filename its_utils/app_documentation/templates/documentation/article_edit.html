@@ -1,0 +1,161 @@
+{% extends 'documentation/base.html' %}
+
+{% block custom_css %}
+    <!-- <link rel="stylesheet" href="/its/docs/static/documentaiton/markdown/css/bootstrap-markdown.min.css"> -->
+{% endblock %}
+
+{% block angular %}
+<body ng-app="app" ng-controller="UploadImage">
+{% endblock %}
+
+{% block article_header %}
+<nav class="navbar navbar-default navbar-lower navbar-fixed-top second-nav-bar" role="navigation">
+    <div class="container">
+        <div class="collapse navbar-collapse collapse-buttons">
+            <ul class="nav navbar-nav">
+                <li><button class="btn btn-default btn-info" ng-click="getRender()">Предпросмотр</button></li>
+                <li><button class="btn btn-default btn-success" onclick="submitArticle()">Сохранить</button></li>
+                <li><button class="btn btn-default btn-warning" onclick="resetContent()">Отменить</button></li>
+                <input type="hidden" id="article_pk" value="{{ article.pk }}">
+
+                {% if article.pk %}
+
+                {% if directories %}
+                    <script>
+                        window.currentDir = "{{ article.directory.name }}";
+                        window.directories = [
+                            {% for d in directories %}
+                                {pk: "{{ d.0 }}", name: "{{ d.1 }}"},       
+                            {% endfor %}
+                        ];
+                    </script>
+
+                    {% verbatim %}
+                    <li class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{ currentDir }}
+                        <span class="caret"></span>
+                      </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li ng-repeat="directory in directories"><a href="#" ng-click="changeDir(directory.pk)">{{ directory.name }}</a></li>
+                          </ul>
+                        {% endverbatim %}
+                    </li>
+                    {% endif %}
+                <li><input type="file" id="image_file" ng-model="imageInput" onchange="uploadOnChange()"></li>
+                <li><button class="btn btn-default btn-danger" ng-click="deleteArticle({{ article.pk }})">Удалить</button></li>
+
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="col-md-9">
+        
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Ошибка:</span>
+          {{ error }}
+        </div>
+        {% endif %}
+
+        {% if article.pk %}
+            <form action="{% url 'article_edit' article.pk %}" method="post" id="article_form">
+        {% else %}
+            <form action="" method="post" id="article_form">
+        {% endif %}
+
+        {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="title">Название</label>
+                    <input name="title" type="text" class="form-control" id="title" value="{{ article.title }}">
+                </div>
+                <div class="form-group">
+                    <label for="article">Статья</label>
+                    <textarea data-markdown-panel class="form-control" name="body" id="article" rows="30">{{ article.body }}</textarea>
+                </div>
+            </form>
+        {% verbatim %}
+            <h1 ng-if="rendered_body">Предпросмотр</h1>
+            <div ng-bind-html="rendered_body | sanitize">
+            </div>
+        {% endverbatim %}
+    </div>
+
+    <div class="col-md-3">
+
+        <script>
+            window.articleBody = document.getElementById('article').innerHTML;
+            var images = [
+                {% for img in images %}
+                    {pk:"{{img.pk}}", url:"{{ img.image.url }}"},
+                {% endfor %}
+            ];
+
+            var mediaUrl = "{{ MEDIA_URL }}";
+        </script>
+
+        {% verbatim %}
+                <div ng-repeat="img in images track by $index">
+                    <div ng-if="img">
+                        <a href="{{ meduaUrl + img.url }}"><img ng-src="{{ meduaUrl + img.url }}" alt="" width="100%"></a>
+                        <button class="btn btn-default btn-image-relative btn-info" ng-click="addImageToArticle(img.url)">
+                            <i class="glyphicon glyphicon-arrow-left"></i>
+                        </button>
+                        <button class="btn btn-default btn-image-relative btn-danger" ng-click="deleteImage($index, img.pk)">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                        <hr>
+                    </div>
+                </div>
+        {% endverbatim %}
+
+    </div>
+    {% verbatim %}
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Вставить ссылку на статью</h4>
+          </div>
+          <div class="modal-body">
+              <input type="text"
+                     ng-model="articleFilter"
+                     class="form-control"
+                      placeholder="Начинайте вводить название статьи">
+              <br>
+              <ul class="list-group">
+                  <button type="button"
+                          data-dismiss="modal"
+                          ng-repeat="article in articles.data | filter:articleFilter"
+                          ng-click="addUrlToArticle(article.id, article.title)"
+                          class="list-group-item">
+                          {{ article.title }}
+                  </button>
+              </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endverbatim %}
+
+</div>
+{% endblock %}
+
+{% block custom_js %}
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+    <script src="/its/docs/static/documentaiton/js/article_edit.js"></script>
+    <script src="/its/docs/static/documentaiton/js/markdown.js"></script>
+{% endblock %}

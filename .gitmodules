@@ -1,0 +1,9 @@
+[submodule "its_utils"]
+	path = its_utils
+	url = git@github-its_utils:hlopikit/its_utils.git
+[submodule "bitrix_utils"]
+	path = bitrix_utils
+	url = git@github-bitrix_utils:hlopikit/bitrix_utils.git
+[submodule "integration_utils"]
+	path = integration_utils
+	url = https://github.com/hlopikit/integration_utils.git

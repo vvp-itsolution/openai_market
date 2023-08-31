@@ -1,0 +1,11 @@
+{% for log in log_records %}
+  <div class="mb-4 log-{{ log.get_level_display|lower }}">
+    <div class="mb-0">
+      <b>
+        [{{ log.id }}] {{ log.date_time|date:'d.m.Y' }} {{ log.date_time|time:'H:i:s' }}
+        {{ log.type }}
+      </b>
+    </div>
+    <code>{{ log.message|safe }}</code>
+  </div>
+{% endfor %}

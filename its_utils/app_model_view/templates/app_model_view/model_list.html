@@ -1,0 +1,19 @@
+{% extends 'app_model_view/base.html' %}
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for app in apps %}
+                {% if app.models %}
+                    <div class="col-md-3">
+                        <div class="app-name">{{ app.name }}</div>
+                        {% for model in app.models %}
+                            <div>
+                                <a class="selectable" href="{% url 'model_detail' app.name model %}">{{ model }}</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
